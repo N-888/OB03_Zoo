@@ -116,9 +116,9 @@ def run_gui(zoo):
     def add_animal_gui():
         name = name_entry.get()  # Получаем имя из поля ввода
         try:
-            age = int(age_entry.get())  # Преобразуем возраст в int
+            age = float(age_entry.get())  # Преобразуем возраст в float
         except ValueError:
-            messagebox.showerror("Error", "Age must be an integer.")
+            messagebox.showerror("Error / Ошибка", "Age must be a positive number / Возраст должен быть положительным числом.")
             return
 
         animal_type = animal_type_var.get()  # Получаем тип животного
@@ -131,31 +131,31 @@ def run_gui(zoo):
         elif animal_type == "Reptile":
             animal = Reptile(name, age)
         else:
-            messagebox.showerror("Error", "Select animal type!")
+            messagebox.showerror("Error / Ошибка", "Select animal type / Выберите Тип Животного!")
             return
 
         zoo.add_animal(animal)  # Добавление животного в зоопарк
-        messagebox.showinfo("Success", f"{animal_type} {name} added to zoo.")
+        messagebox.showinfo("Success / Успешно", f"{animal_type} {name} added to zoo / добавлен в зоопарк.")
 
     # Элементы интерфейса
-    tk.Label(root_window, text="Name:").pack()
+    tk.Label(root_window, text="Name / Имя:").pack()
     name_entry = tk.Entry(root_window)
     name_entry.pack()
 
-    tk.Label(root_window, text="Age:").pack()
+    tk.Label(root_window, text="Age (months) / Возраст (месяцы):").pack()
     age_entry = tk.Entry(root_window)
     age_entry.pack()
 
     animal_type_var = tk.StringVar(value="Bird")
-    tk.Label(root_window, text="Type:").pack()
+    tk.Label(root_window, text="Type / Тип:").pack()
 
     # Радиокнопки для выбора типа животного
-    tk.Radiobutton(root_window, text="Bird", variable=animal_type_var, value="Bird").pack()
-    tk.Radiobutton(root_window, text="Mammal", variable=animal_type_var, value="Mammal").pack()
-    tk.Radiobutton(root_window, text="Reptile", variable=animal_type_var, value="Reptile").pack()
+    tk.Radiobutton(root_window, text="Bird-Птица", variable=animal_type_var, value="Bird").pack()
+    tk.Radiobutton(root_window, text="Mammal-Млекопитающее", variable=animal_type_var, value="Mammal").pack()
+    tk.Radiobutton(root_window, text="Reptile-Рептилия", variable=animal_type_var, value="Reptile").pack()
 
     # Кнопка "Add Animal"
-    tk.Button(root_window, text="Add Animal", command=add_animal_gui).pack()
+    tk.Button(root_window, text="Add Animal / Добавить Животное", command=add_animal_gui).pack()
 
     root_window.mainloop()  # Запуск главного цикла окна
 
@@ -179,17 +179,17 @@ def menu(zoo):
         if choice == "1":
             name = input("Animal Name / Имя животного: ")
             try:
-                age = int(input("Animal Age / Возраст животного: "))
+                age = float(input("Animal Age (monthes) / Возраст животного (месяцы): "))
             except ValueError:
                 print("Age must be a number / Возраст должен быть числом.")
                 continue
 
-            type_choice = input("Type (Bird/Mammal/Reptile): ").strip()
-            if type_choice.lower() == "bird":
+            type_choice = input("Type (Bird-Птица/Mammal-Млекопитающее/Reptile-Рептилия): ").strip()
+            if type_choice.lower() == "bird-Птица":
                 zoo.add_animal(Bird(name, age))
-            elif type_choice.lower() == "mammal":
+            elif type_choice.lower() == "mammal-Млекопитающее":
                 zoo.add_animal(Mammal(name, age))
-            elif type_choice.lower() == "reptile":
+            elif type_choice.lower() == "reptile-Рептилия":
                 zoo.add_animal(Reptile(name, age))
             else:
                 print("Invalid animal type / Неверный тип животного!")
@@ -225,5 +225,5 @@ def menu(zoo):
 
 # Точка входа — запуск программы
 if __name__ == "__main__":
-    zoo_instance = Zoo("City Zoo / Городской Зоопарк")  # Создаём зоопарк
+    zoo_instance = Zoo("New Zoo / Новый Зоопарк")  # Создаём зоопарк
     menu(zoo_instance)  # Запускаем меню

@@ -1,0 +1,7 @@
+2025-07-01 00:04:06,637 Ч INFO Ч Zoo state saved to file.
+2025-07-01 00:40:14,146 Ч INFO Ч Animal бт ьт  added to the zoo.
+2025-07-01 00:44:20,082 Ч INFO Ч Animal ћики added to the zoo.
+2025-07-01 00:48:55,469 Ч INFO Ч Animal ћика added to the zoo.
+2025-07-01 00:50:00,920 Ч INFO Ч Animal ћикаирр added to the zoo.
+2025-07-01 00:51:35,747 Ч INFO Ч Animal  типмлри  added to the zoo.
+2025-07-01 00:54:58,414 Ч INFO Ч Animal erdjytvkhjb  added to the zoo.
