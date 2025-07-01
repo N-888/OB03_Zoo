@@ -109,8 +109,27 @@ class Veterinarian(Staff):
 
 # Функция запуска графического интерфейса
 def run_gui(zoo):
-    root_window = tk.Tk()  # Создание основного окна
-    root_window.title(f"{zoo.name} Management")  # Заголовок окна
+    # Создание основного окна
+    root_window = tk.Tk()
+    root_window.title(f"{zoo.name} Management") # Заголовок окна
+
+    # Увеличиваем ширину окна в 3 раза
+    root_window.geometry("700x700")
+
+    # Устанавливаем фон окна (оливково-салатовая гамма)
+    root_window.configure(bg="#dce2b8")
+
+    # Попытка установить иконку (логотип)
+    try:
+        root_window.iconbitmap("zoo_logo.ico")  # путь к файлу-иконке
+    except Exception as e:
+        logging.warning(f"Icon not found: {e}")
+
+    # Цвета для оформления элементов
+    bg_color = "#dce2b8"         # фон для лэйблов и окна
+    btn_color = "#a9c186"        # цвет кнопок
+    text_color = "#333337"       # цвет текста
+    entry_bg = "#f8f8f8"         # фон полей ввода
 
     # Вложенная функция для добавления животного через GUI
     def add_animal_gui():
@@ -137,25 +156,116 @@ def run_gui(zoo):
         zoo.add_animal(animal)  # Добавление животного в зоопарк
         messagebox.showinfo("Success / Успешно", f"{animal_type} {name} added to zoo / добавлен в зоопарк.")
 
-    # Элементы интерфейса
-    tk.Label(root_window, text="Name / Имя:").pack()
-    name_entry = tk.Entry(root_window)
-    name_entry.pack()
+        # Функция добавления смотрителя
 
-    tk.Label(root_window, text="Age (months) / Возраст (месяцы):").pack()
-    age_entry = tk.Entry(root_window)
-    age_entry.pack()
+    def add_keeper():
+        name = simple_input("Enter ZooKeeper Name / Введите имя смотрителя:")
+        if name:
+            zoo.add_staff(ZooKeeper(name))
+            messagebox.showinfo("Success / Успешно", f"ZooKeeper {name} added.")
 
-    animal_type_var = tk.StringVar(value="Bird")
-    tk.Label(root_window, text="Type / Тип:").pack()
+        # Функция добавления ветеринара
+
+    def add_vet():
+        name = simple_input("Enter Veterinarian Name / Введите имя ветеринара:")
+        if name:
+            zoo.add_staff(Veterinarian(name))
+            messagebox.showinfo("Success / Успешно", f"Veterinarian {name} added.")
+
+        # Функция вывода звуков животных
+
+    def show_animal_sounds():
+        if not zoo.animals:
+            messagebox.showinfo("Info / Информация", "No animals in the zoo yet / Животных пока нет.")
+            return
+        sounds = "\n".join([f"{animal.name}: {animal.__class__.__name__} says…" for animal in zoo.animals])
+        animal_sound(zoo.animals)
+        messagebox.showinfo("Animal Sounds / Звуки животных", sounds)
+
+        # Функция сохранения зоопарка
+
+    def save_zoo():
+        zoo.save_zoo()
+        messagebox.showinfo("Success / Успешно", "Zoo state saved/ Зоопарк сохранен.")
+
+        # Функция загрузки зоопарка
+
+    def load_zoo():
+        loaded = Zoo.load_zoo()
+        zoo.animals = loaded.animals
+        zoo.staff = loaded.staff
+        zoo.name = loaded.name
+        messagebox.showinfo("Loaded / Загружено", "Zoo state loaded/ Зоопарк загружен.")
+
+        # Универсальный ввод через окно
+
+    def simple_input(prompt):
+        input_window = tk.Toplevel(root_window)
+        input_window.title(prompt)
+        input_window.configure(bg=bg_color)
+        input_window.geometry("300x100")
+
+        tk.Label(input_window, text=prompt, bg=bg_color, fg=text_color).pack()
+        entry = tk.Entry(input_window, bg=entry_bg)
+        entry.pack()
+
+        result = {'value': None}
+
+        def submit():
+            result['value'] = entry.get()
+            input_window.destroy()
+
+        tk.Button(input_window, text="OK", command=submit, bg=btn_color, fg=text_color).pack()
+        input_window.wait_window()
+        return result['value']
+
+        # Элементы интерфейса - оформление полей ввода и кнопок
+
+        # Поле имени животного
+
+    tk.Label(root_window, text="Name / Имя:", bg=bg_color, fg=text_color).pack()
+    name_entry = tk.Entry(root_window, bg=entry_bg)
+    name_entry.pack(pady=8)
+
+    # Поле возраста животного
+    tk.Label(root_window, text="Age (months) / Возраст (мес):", bg=bg_color, fg=text_color).pack()
+    age_entry = tk.Entry(root_window, bg=entry_bg)
+    age_entry.pack(pady=8)
 
     # Радиокнопки для выбора типа животного
-    tk.Radiobutton(root_window, text="Bird-Птица", variable=animal_type_var, value="Bird").pack()
-    tk.Radiobutton(root_window, text="Mammal-Млекопитающее", variable=animal_type_var, value="Mammal").pack()
-    tk.Radiobutton(root_window, text="Reptile-Рептилия", variable=animal_type_var, value="Reptile").pack()
+    animal_type_var = tk.StringVar(value="Bird")
+    tk.Label(root_window, text="Type / Тип:", bg=bg_color, fg=text_color).pack(pady=5)
+    for animal_type, label in [("Bird", "Bird-Птица"), ("Mammal", "Mammal-Млекопитающее"),
+                               ("Reptile", "Reptile-Рептилия")]:
+        tk.Radiobutton(root_window, text=label, variable=animal_type_var, value=animal_type,
+                       bg=bg_color, fg=text_color, selectcolor=entry_bg).pack(pady=5)
 
-    # Кнопка "Add Animal"
-    tk.Button(root_window, text="Add Animal / Добавить Животное", command=add_animal_gui).pack()
+    # Кнопка добавления животного
+    tk.Button(root_window, text="Add Animal / Добавить Животное", command=add_animal_gui, bg=btn_color,
+              fg=text_color).pack(pady=5)
+
+    # Кнопка добавления смотрителя
+    tk.Button(root_window, text="Add ZooKeeper / Добавить смотрителя", command=add_keeper, bg=btn_color,
+              fg=text_color).pack(pady=5)
+
+    # Кнопка добавления ветеринара
+    tk.Button(root_window, text="Add Veterinarian / Добавить ветеринара", command=add_vet, bg=btn_color,
+              fg=text_color).pack(pady=5)
+
+    # Кнопка вывода звуков животных
+    tk.Button(root_window, text="Show Animal Sounds / Звуки животных", command=show_animal_sounds, bg=btn_color,
+              fg=text_color).pack(pady=5)
+
+    # Кнопка сохранения зоопарка
+    tk.Button(root_window, text="Save Zoo / Сохранить зоопарк", command=save_zoo, bg=btn_color, fg=text_color).pack(
+        pady=5)
+
+    # Кнопка загрузки зоопарка
+    tk.Button(root_window, text="Load Zoo / Загрузить зоопарк", command=load_zoo, bg=btn_color, fg=text_color).pack(
+        pady=5)
+
+    # Кнопка выхода
+    tk.Button(root_window, text="Exit / Выход", command=root_window.destroy, bg=btn_color, fg=text_color).pack(pady=10)
 
     root_window.mainloop()  # Запуск главного цикла окна
 

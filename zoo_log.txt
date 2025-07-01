@@ -5,3 +5,15 @@
 2025-07-01 00:50:00,920 Ч INFO Ч Animal ћикаирр added to the zoo.
 2025-07-01 00:51:35,747 Ч INFO Ч Animal  типмлри  added to the zoo.
 2025-07-01 00:54:58,414 Ч INFO Ч Animal erdjytvkhjb  added to the zoo.
+2025-07-01 02:10:14,089 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:12:35,408 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:13:42,730 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:14:49,057 Ч INFO Ч Staff пмбрт  hired.
+2025-07-01 02:16:50,848 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:18:55,868 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:20:23,845 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:20:53,588 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:34:56,492 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:37:57,560 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:40:28,471 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 02:42:23,685 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
