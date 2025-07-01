@@ -135,7 +135,7 @@ class Veterinarian(Staff):
 def run_gui(zoo):
     root_window = tk.Tk()
     root_window.title(f"Управление зоопарком: {zoo.name} | Zoo Management: {zoo.name}")
-    root_window.geometry("500x750")  # Increased height to 750
+    root_window.geometry("500x750")
 
     colors = {
         'bg_color': "#dce2b9",
@@ -143,7 +143,7 @@ def run_gui(zoo):
         'text_color': "#5D4037",
         'entry_bg': "#f8f8f8",
         'accent_color': "#8D6E63",
-        'success_bg': "#dce2b9",  # Changed to match main window background
+        'success_bg': "#dce2b9",
         'success_fg': "#5D4037",
         'tab_bg': "#a9c186",
         'tab_fg': "#5D4037"
@@ -211,7 +211,7 @@ def run_gui(zoo):
         success_window = tk.Toplevel(root_window)
         success_window.title(title)
         success_window.geometry("400x150")
-        success_window.configure(bg=colors['success_bg'])  # Now matches main window
+        success_window.configure(bg=colors['success_bg'])
         success_window.resizable(False, False)
 
         screen_width = success_window.winfo_screenwidth()
@@ -365,7 +365,6 @@ def run_gui(zoo):
         filter_frame = tk.Frame(view_window, bg=colors['bg_color'])
         filter_frame.pack(fill='x', padx=5, pady=5)
 
-        # First row for filter entry
         filter_row1 = tk.Frame(filter_frame, bg=colors['bg_color'])
         filter_row1.pack(fill='x', pady=5)
 
@@ -373,19 +372,16 @@ def run_gui(zoo):
         filter_entry = tk.Entry(filter_row1)
         filter_entry.pack(side='left', padx=5, fill='x', expand=True)
 
-        # Second row for type selection and apply button
         filter_row2 = tk.Frame(filter_frame, bg=colors['bg_color'])
         filter_row2.pack(fill='x', pady=5)
 
-        # Wider "All" dropdown and "Apply Filter" button
         filter_type_var = tk.StringVar(value="Все | All")
         filter_types = ["Все | All", "Bird | Птица", "Mammal | Млекопитающее", "Reptile | Рептилия",
                         "ZooKeeper | Смотритель", "Veterinarian | Ветеринар"]
         create_label(filter_row2, "Тип: | Type:").pack(side='left')
-        filter_menu = create_option_menu(filter_row2, filter_type_var, filter_types, width=25)  # Increased width
+        filter_menu = create_option_menu(filter_row2, filter_type_var, filter_types, width=25)
         filter_menu.pack(side='left', padx=5)
 
-        # Wider "Apply Filter" button to match bottom buttons
         apply_filter_btn = create_button(filter_row2, "Применить фильтр | Apply Filter", apply_filter, width=30,
                                          font_size=9)
         apply_filter_btn.pack(side='left', padx=5)
@@ -448,7 +444,8 @@ def run_gui(zoo):
                 if not animal:
                     return
 
-                edit_window = create_toplevel("Редактировать животное | Edit Animal", 300, 150)
+                # Увеличена высота окна редактирования животного с 150 до 180
+                edit_window = create_toplevel("Редактировать животное | Edit Animal", 300, 180)
 
                 create_label(edit_window, "Новое имя: | New Name:").pack(pady=5)
                 name_var = tk.StringVar(value=name)
@@ -479,7 +476,8 @@ def run_gui(zoo):
                     edit_window.destroy()
                     show_success_message("Успех | Success", "Данные животного обновлены! | Animal updated!")
 
-                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=10)
+                # Увеличен отступ сверху для кнопки сохранения
+                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=15)
 
             elif current_tab == 1:
                 item_data = staff_tree.item(selected[0])
@@ -488,7 +486,8 @@ def run_gui(zoo):
                 if not staff:
                     return
 
-                edit_window = create_toplevel("Редактировать сотрудника | Edit Staff", 300, 150)
+                # Увеличена высота окна редактирования сотрудника с 150 до 180
+                edit_window = create_toplevel("Редактировать сотрудника | Edit Staff", 300, 180)
 
                 create_label(edit_window, "Новое имя: | New Name:").pack(pady=5)
                 name_var = tk.StringVar(value=name)
@@ -504,21 +503,21 @@ def run_gui(zoo):
                     edit_window.destroy()
                     show_success_message("Успех | Success", "Данные сотрудника обновлены! | Staff updated!")
 
-                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=10)
+                # Увеличен отступ сверху для кнопки сохранения
+                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=15)
 
         btn_frame = tk.Frame(view_window, bg=colors['bg_color'])
         btn_frame.pack(fill='x', padx=5, pady=5)
 
-        # Buttons with consistent width and font size
         delete_btn = create_button(btn_frame, "Удалить выбранное | Delete Selected", delete_entity, width=28,
                                    font_size=9)
         delete_btn.pack(side='left', padx=2, fill='x', expand=True)
 
-        edit_btn = create_button(btn_frame, "Редактировать выбранное | Edit Selected", edit_entity, width=28,
+        edit_btn = create_button(btn_frame, "Редактировать выбранное | Edit Selected", edit_entity, width=30,
                                  font_size=9)
         edit_btn.pack(side='left', padx=2, fill='x', expand=True)
 
-        refresh_btn = create_button(btn_frame, "Обновить | Refresh", refresh_data, width=20, font_size=9)
+        refresh_btn = create_button(btn_frame, "Обновить | Refresh", refresh_data, width=18, font_size=9)
         refresh_btn.pack(side='right', padx=2, fill='x', expand=True)
 
     def play_animal_sound():
@@ -566,13 +565,16 @@ def run_gui(zoo):
                                  "Возраст должен быть положительным числом! | Age must be a positive number!")
             return
 
-        selected_type = animal_type_var.get().split(" | ")[0]
+        full_type = animal_type_var.get()
+        parts = full_type.split(" | ")
+        russian_type = parts[0]
+        english_type = parts[1] if len(parts) > 1 else russian_type
 
-        if selected_type == "Птица":
+        if russian_type == "Птица":
             animal = Bird(name, age)
-        elif selected_type == "Млекопитающее":
+        elif russian_type == "Млекопитающее":
             animal = Mammal(name, age)
-        elif selected_type == "Рептилия":
+        elif russian_type == "Рептилия":
             animal = Reptile(name, age)
         else:
             messagebox.showerror("Ошибка | Error", "Выберите тип животного! | Select animal type!")
@@ -580,8 +582,8 @@ def run_gui(zoo):
 
         zoo.add_animal(animal)
         show_success_message("Успех | Success",
-                             f"{selected_type} {name} добавлен в зоопарк. | {selected_type} {name} added to zoo.")
-        logging.info(f"Добавлено животное: {name} ({selected_type})")
+                             f"{russian_type} {name} добавлен в зоопарк. | {english_type} {name} added to zoo.")
+        logging.info(f"Добавлено животное: {name} ({russian_type})")
 
         name_entry.delete(0, tk.END)
         age_entry.delete(0, tk.END)
@@ -647,7 +649,6 @@ def run_gui(zoo):
                     root_window.title(f"Управление зоопарком: {zoo.name} | Zoo Management: {zoo.name}")
                     logging.info("Создан новый зоопарк после ошибки загрузки")
 
-    # Main Interface
     create_label(root_window, "Добавление животных | Add Animals", font_size=11).pack(pady=(10, 5))
 
     create_label(root_window, "Имя животного: | Animal Name:").pack()
@@ -659,7 +660,7 @@ def run_gui(zoo):
     age_entry.pack(pady=2)
 
     animal_type_var = tk.StringVar(value="Птица | Bird")
-    create_label(root_window, "Тип животного: | Animal Type:").pack(pady=2)
+    create_label(root_window, "Выберите Тип животного: | Select Animal Type:").pack(pady=2)
 
     animal_types = ["Птица | Bird", "Млекопитающее | Mammal", "Рептилия | Reptile"]
     animal_type_menu = create_option_menu(root_window, animal_type_var, animal_types)
