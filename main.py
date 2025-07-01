@@ -3,7 +3,6 @@ from tkinter import messagebox, simpledialog, filedialog, ttk
 import logging
 import os
 import pickle
-import sys
 
 try:
     import pygame
@@ -185,7 +184,7 @@ def run_gui(zoo):
             font=("Arial", font_size)
         )
 
-    def create_option_menu(parent, variable, options, width=47):
+    def create_option_menu(parent, variable, options, width=50):  # Ширина уменьшена с 47 до 50
         menu = tk.OptionMenu(parent, variable, *options)
         menu.config(
             bg=colors['btn_color'],
@@ -210,15 +209,7 @@ def run_gui(zoo):
     def show_success_message(title, message):
         success_window = tk.Toplevel(root_window)
         success_window.title(title)
-        success_window.geometry("400x150")
         success_window.configure(bg=colors['success_bg'])
-        success_window.resizable(False, False)
-
-        screen_width = success_window.winfo_screenwidth()
-        screen_height = success_window.winfo_screenheight()
-        x = (screen_width - 400) // 2
-        y = (screen_height - 150) // 2
-        success_window.geometry(f"400x150+{x}+{y}")
 
         label = tk.Label(
             success_window,
@@ -240,6 +231,17 @@ def run_gui(zoo):
             font=("Arial", 9)
         )
         button.pack(pady=(0, 15))
+
+        success_window.update_idletasks()
+        req_width = max(400, success_window.winfo_reqwidth())
+        req_height = max(150, success_window.winfo_reqheight())
+
+        screen_width = success_window.winfo_screenwidth()
+        screen_height = success_window.winfo_screenheight()
+        x = (screen_width - req_width) // 2
+        y = (screen_height - req_height) // 2
+        success_window.geometry(f"{req_width}x{req_height}+{x}+{y}")
+        success_window.resizable(False, False)
 
     def configure_colors():
         color_window = create_toplevel("Настройки цветов | Color Settings", 300, 300)
@@ -265,7 +267,7 @@ def run_gui(zoo):
         create_label(color_window, "Цвет текста: | Text Color:").pack(pady=5)
         text_var = tk.StringVar(value=colors['text_color'])
         tk.Entry(color_window, textvariable=text_var).pack(pady=5)
-        create_button(color_window, "Применит | Apply", lambda: update_color(text_var, 'text_color'), width=20).pack(
+        create_button(color_window, "Применить | Apply", lambda: update_color(text_var, 'text_color'), width=20).pack(
             pady=5)
 
         create_label(color_window, "Фон полей ввода: | Entry Background:").pack(pady=5)
@@ -444,20 +446,32 @@ def run_gui(zoo):
                 if not animal:
                     return
 
-                # Увеличена высота окна редактирования животного с 150 до 180
-                edit_window = create_toplevel("Редактировать животное | Edit Animal", 300, 180)
+                edit_window = create_toplevel("Редактировать животное | Edit Animal", 450, 180)
 
-                create_label(edit_window, "Новое имя: | New Name:").pack(pady=5)
+                form_frame = tk.Frame(edit_window, bg=colors['bg_color'])
+                form_frame.pack(fill='both', padx=20, pady=10, expand=True)
+
+                create_label(form_frame, "Новое имя: | New Name:").pack(anchor='w', pady=5)
                 name_var = tk.StringVar(value=name)
-                name_entry_edit = tk.Entry(edit_window, textvariable=name_var, bg=colors['entry_bg'],
-                                           fg=colors['text_color'])
-                name_entry_edit.pack(pady=5)
+                name_entry_edit = tk.Entry(
+                    form_frame,
+                    textvariable=name_var,
+                    width=40,
+                    bg=colors['entry_bg'],
+                    fg=colors['text_color']
+                )
+                name_entry_edit.pack(fill='x', pady=5)
 
-                create_label(edit_window, "Новый возраст: | New Age:").pack(pady=5)
+                create_label(form_frame, "Новый возраст: | New Age:").pack(anchor='w', pady=5)
                 age_var = tk.StringVar(value=str(age))
-                age_entry_edit = tk.Entry(edit_window, textvariable=age_var, bg=colors['entry_bg'],
-                                          fg=colors['text_color'])
-                age_entry_edit.pack(pady=5)
+                age_entry_edit = tk.Entry(
+                    form_frame,
+                    textvariable=age_var,
+                    width=40,
+                    bg=colors['entry_bg'],
+                    fg=colors['text_color']
+                )
+                age_entry_edit.pack(fill='x', pady=5)
 
                 def save_changes():
                     new_name = name_var.get()
@@ -476,8 +490,10 @@ def run_gui(zoo):
                     edit_window.destroy()
                     show_success_message("Успех | Success", "Данные животного обновлены! | Animal updated!")
 
-                # Увеличен отступ сверху для кнопки сохранения
-                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=15)
+                button_frame = tk.Frame(edit_window, bg=colors['bg_color'])
+                button_frame.pack(fill='x', padx=20, pady=10)
+
+                create_button(button_frame, "Сохранить | Save", save_changes, width=20).pack(pady=5)
 
             elif current_tab == 1:
                 item_data = staff_tree.item(selected[0])
@@ -486,14 +502,21 @@ def run_gui(zoo):
                 if not staff:
                     return
 
-                # Увеличена высота окна редактирования сотрудника с 150 до 180
-                edit_window = create_toplevel("Редактировать сотрудника | Edit Staff", 300, 180)
+                edit_window = create_toplevel("Редактировать сотрудника | Edit Staff", 450, 180)
 
-                create_label(edit_window, "Новое имя: | New Name:").pack(pady=5)
+                form_frame = tk.Frame(edit_window, bg=colors['bg_color'])
+                form_frame.pack(fill='both', padx=20, pady=10, expand=True)
+
+                create_label(form_frame, "Новое имя: | New Name:").pack(anchor='w', pady=5)
                 name_var = tk.StringVar(value=name)
-                name_entry_edit = tk.Entry(edit_window, textvariable=name_var, bg=colors['entry_bg'],
-                                           fg=colors['text_color'])
-                name_entry_edit.pack(pady=5)
+                name_entry_edit = tk.Entry(
+                    form_frame,
+                    textvariable=name_var,
+                    width=40,
+                    bg=colors['entry_bg'],
+                    fg=colors['text_color']
+                )
+                name_entry_edit.pack(fill='x', pady=5)
 
                 def save_changes():
                     new_name = name_var.get()
@@ -503,8 +526,10 @@ def run_gui(zoo):
                     edit_window.destroy()
                     show_success_message("Успех | Success", "Данные сотрудника обновлены! | Staff updated!")
 
-                # Увеличен отступ сверху для кнопки сохранения
-                create_button(edit_window, "Сохранить | Save", save_changes, width=20).pack(pady=15)
+                button_frame = tk.Frame(edit_window, bg=colors['bg_color'])
+                button_frame.pack(fill='x', padx=20, pady=10)
+
+                create_button(button_frame, "Сохранить | Save", save_changes, width=20).pack(pady=5)
 
         btn_frame = tk.Frame(view_window, bg=colors['bg_color'])
         btn_frame.pack(fill='x', padx=5, pady=5)
@@ -649,47 +674,59 @@ def run_gui(zoo):
                     root_window.title(f"Управление зоопарком: {zoo.name} | Zoo Management: {zoo.name}")
                     logging.info("Создан новый зоопарк после ошибки загрузки")
 
+    # Ширина всех элементов главного окна
+    element_width = 50  # Общая ширина для всех элементов
+
     create_label(root_window, "Добавление животных | Add Animals", font_size=11).pack(pady=(10, 5))
 
     create_label(root_window, "Имя животного: | Animal Name:").pack()
-    name_entry = tk.Entry(root_window, width=48, bg=colors['entry_bg'], fg=colors['text_color'])
+    name_entry = tk.Entry(root_window, width=element_width, bg=colors['entry_bg'], fg=colors['text_color'])
     name_entry.pack(pady=2)
 
     create_label(root_window, "Возраст (месяцев): | Age (months):").pack()
-    age_entry = tk.Entry(root_window, width=48, bg=colors['entry_bg'], fg=colors['text_color'])
+    age_entry = tk.Entry(root_window, width=element_width, bg=colors['entry_bg'], fg=colors['text_color'])
     age_entry.pack(pady=2)
 
     animal_type_var = tk.StringVar(value="Птица | Bird")
     create_label(root_window, "Выберите Тип животного: | Select Animal Type:").pack(pady=2)
 
     animal_types = ["Птица | Bird", "Млекопитающее | Mammal", "Рептилия | Reptile"]
-    animal_type_menu = create_option_menu(root_window, animal_type_var, animal_types)
-    animal_type_menu.pack(pady=2)
 
-    create_button(root_window, "Добавить животное | Add Animal", add_animal_gui).pack(pady=7)
+    # Создание контейнера для выравнивания OptionMenu
+    type_menu_frame = tk.Frame(root_window, bg=colors['bg_color'])
+    type_menu_frame.pack(fill='x', padx=5, pady=2)
+
+    # Создание OptionMenu с выравниванием по ширине
+    animal_type_menu = create_option_menu(type_menu_frame, animal_type_var, animal_types, width=element_width)
+    animal_type_menu.pack(fill='x', expand=True)  # Растягиваем на всю ширину контейнера
+
+    create_button(root_window, "Добавить животное | Add Animal", add_animal_gui, width=element_width).pack(pady=7)
 
     create_label(root_window, "Добавление персонала | Add Staff", font_size=11).pack(pady=(15, 5))
 
     create_label(root_window, "Имя смотрителя: | ZooKeeper Name:").pack()
-    keeper_entry = tk.Entry(root_window, width=48, bg=colors['entry_bg'], fg=colors['text_color'])
+    keeper_entry = tk.Entry(root_window, width=element_width, bg=colors['entry_bg'], fg=colors['text_color'])
     keeper_entry.pack(pady=2)
 
-    create_button(root_window, "Добавить смотрителя | Add ZooKeeper", add_keeper).pack(pady=7)
+    create_button(root_window, "Добавить смотрителя | Add ZooKeeper", add_keeper, width=element_width).pack(pady=7)
 
     create_label(root_window, "Имя ветеринара: | Veterinarian Name:").pack()
-    vet_entry = tk.Entry(root_window, width=48, bg=colors['entry_bg'], fg=colors['text_color'])
+    vet_entry = tk.Entry(root_window, width=element_width, bg=colors['entry_bg'], fg=colors['text_color'])
     vet_entry.pack(pady=2)
 
-    create_button(root_window, "Добавить ветеринара | Add Veterinarian", add_vet).pack(pady=7)
+    create_button(root_window, "Добавить ветеринара | Add Veterinarian", add_vet, width=element_width).pack(pady=7)
 
-    create_button(root_window, "Воспроизвести звук животного | Play Animal Sound", play_animal_sound).pack(pady=7)
-    create_button(root_window, "Просмотр животных и персонала | View Animals and Staff", view_entities).pack(pady=7)
-    create_button(root_window, "Сохранить зоопарк | Save Zoo", save_zoo).pack(pady=7)
-    create_button(root_window, "Загрузить зоопарк | Load Zoo", load_zoo).pack(pady=7)
-    create_button(root_window, "Сменить пароль администратора | Change Admin Password", change_admin_password).pack(
-        pady=7)
-    create_button(root_window, "Настройки цветов | Color Settings", configure_colors).pack(pady=7)
-    create_button(root_window, "Выход | Exit", root_window.destroy).pack(pady=12)
+    # Кнопки с фиксированной шириной
+    create_button(root_window, "Воспроизвести звук животного | Play Animal Sound", play_animal_sound,
+                  width=element_width).pack(pady=7)
+    create_button(root_window, "Просмотр животных и персонала | View Animals and Staff", view_entities,
+                  width=element_width).pack(pady=7)
+    create_button(root_window, "Сохранить зоопарк | Save Zoo", save_zoo, width=element_width).pack(pady=7)
+    create_button(root_window, "Загрузить зоопарк | Load Zoo", load_zoo, width=element_width).pack(pady=7)
+    create_button(root_window, "Сменить пароль администратора | Change Admin Password", change_admin_password,
+                  width=element_width).pack(pady=7)
+    create_button(root_window, "Настройки цветов | Color Settings", configure_colors, width=element_width).pack(pady=7)
+    create_button(root_window, "Выход | Exit", root_window.destroy, width=element_width).pack(pady=12)
 
     apply_colors()
     root_window.mainloop()
