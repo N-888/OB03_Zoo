@@ -66,3 +66,15 @@
 2025-07-01 05:24:24,065 Ч INFO Ч Staff m,nb m hired.
 2025-07-01 05:24:39,351 Ч INFO Ч Zoo state saved to file.
 2025-07-01 05:24:43,094 Ч INFO Ч Zoo state loaded from file.
+2025-07-01 20:10:53,972 Ч ERROR Ч ‘айл last_zoo.pkl не найден.
+2025-07-01 20:10:53,973 Ч WARNING Ч ќшибка автоматической загрузки: [Errno 2] No such file or directory: 'last_zoo.pkl'
+2025-07-01 20:11:00,026 Ч INFO Ч —оздан новый зоопарк после ошибки загрузки
+2025-07-01 20:11:00,283 Ч WARNING Ч »конка не найдена: bitmap "zoo_logo.ico" not defined
+2025-07-01 20:11:09,727 Ч INFO Ч —осто€ние зоопарка загружено из C:/Users/Lenovo/Documents/GitHub/OB03_Zoo/«оопарк1.pkl.
+2025-07-01 20:11:09,737 Ч INFO Ч «оопарк загружен из C:/Users/Lenovo/Documents/GitHub/OB03_Zoo/«оопарк1.pkl
+2025-07-01 20:25:37,426 Ч ERROR Ч ‘айл last_zoo.pkl не найден.
+2025-07-01 20:25:37,430 Ч WARNING Ч ќшибка автоматической загрузки: [Errno 2] No such file or directory: 'last_zoo.pkl'
+2025-07-01 20:25:41,376 Ч INFO Ч —оздан новый зоопарк после ошибки загрузки
+2025-07-01 20:25:41,995 Ч WARNING Ч »конка не найдена: bitmap "zoo_logo.ico" not defined
+2025-07-01 20:26:01,068 Ч INFO Ч ∆ивотное v nb nmb nb  добавлено в зоопарк.
+2025-07-01 20:26:01,107 Ч INFO Ч ƒобавлено животное: v nb nmb nb  (ѕтица)
