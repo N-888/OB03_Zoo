@@ -126,6 +126,29 @@ class Zoo:
         # Запись информации о добавлении сотрудника в лог
         logging.info(f"Сотрудник {staff_member.name} нанят.")
 
+    # Метод для воспроизведения звуков всех животных в зоопарке
+    def make_all_sounds(self):
+        """
+        Проходит по всем животным в зоопарке и вызывает их метод make_sound().
+        Демонстрирует полиморфное поведение - разные типы животных издают разные звуки.
+        """
+        # Проверка наличия животных в зоопарке
+        if not self.animals:
+            # Запись предупреждения в лог
+            logging.warning("Попытка воспроизвести звуки, но в зоопарке нет животных")
+            return False  # Возврат статуса неудачи
+
+        # Запись в лог о начале воспроизведения звуков
+        logging.info("Начато воспроизведение звуков всех животных")
+
+        # Перебор всех животных в зоопарке
+        for animal in self.animals:
+            # Вызов метода издания звука для каждого животного
+            # Полиморфизм: для каждого типа животного будет вызван свой метод make_sound()
+            animal.make_sound()
+
+        return True  # Возврат статуса успеха
+
     # Метод для сохранения состояния зоопарка в файл
     def save_zoo(self, filename="zoo_data.pkl"):
         try:
@@ -196,7 +219,7 @@ def run_gui(zoo):
     # Установка заголовка окна с названием зоопарка
     root_window.title(f"Управление зоопарком: {zoo.name} | Zoo Management: {zoo.name}")
     # Установка размеров главного окна
-    root_window.geometry("500x750")
+    root_window.geometry("500x800")  # Увеличена высота для новой кнопки
 
     # Цветовая схема приложения
     colors = {
@@ -894,6 +917,32 @@ def run_gui(zoo):
         # Создание кнопки воспроизведения звука
         create_button(sound_window, "Воспроизвести звук | Play Sound", play_sound, width=30).pack(pady=10)
 
+    # Функция для воспроизведения звуков ВСЕХ животных
+    def play_all_animal_sounds():
+        """
+        Вызывает метод зоопарка для воспроизведения звуков всех животных.
+        Обрабатывает случаи, когда в зоопарке нет животных.
+        """
+        # Проверка наличия животных в зоопарке
+        if not zoo.animals:
+            # Отображение информационного сообщения
+            messagebox.showinfo("Информация | Info", "В зоопарке пока нет животных. | No animals in the zoo yet.")
+            return
+
+        try:
+            # Вызов метода для воспроизведения всех звуков
+            success = zoo.make_all_sounds()
+            # Проверка успешности выполнения
+            if success:
+                # Отображение сообщения об успешном выполнении
+                show_success_message("Успех | Success",
+                                     "Воспроизведены звуки всех животных! | All animal sounds played!")
+        except Exception as e:
+            # Обработка ошибок при воспроизведении
+            logging.error(f"Ошибка при воспроизведении всех звуков: {e}")
+            # Отображение сообщения об ошибке
+            messagebox.showerror("Ошибка | Error", f"Не удалось воспроизвести звуки: {str(e)}")
+
     # Функция для добавления животного через GUI
     def add_animal_gui():
         # Получение имени животного из поля ввода
@@ -1101,7 +1150,7 @@ def run_gui(zoo):
     # Создание кнопки для добавления смотрителя
     create_button(root_window, "Добавить смотрителя | Add ZooKeeper", add_keeper, width=element_width).pack(pady=7)
 
-    # Создание метки для поля ввода имени ветеринара
+    # Создание метки для поле ввода имени ветеринара
     create_label(root_window, "Имя ветеринара: | Veterinarian Name:").pack()
     # Создание поля ввода для имени ветеринара
     vet_entry = tk.Entry(root_window, width=element_width, bg=colors['entry_bg'], fg=colors['text_color'])
@@ -1111,9 +1160,14 @@ def run_gui(zoo):
     # Создание кнопки для добавления ветеринара
     create_button(root_window, "Добавить ветеринара | Add Veterinarian", add_vet, width=element_width).pack(pady=7)
 
-    # Создание кнопки для воспроизведения звука животного
+    # Создание кнопки для воспроизведения звука одного животного
     create_button(root_window, "Воспроизвести звук животного | Play Animal Sound", play_animal_sound,
                   width=element_width).pack(pady=7)
+
+    # НОВАЯ КНОПКА: Воспроизведение звуков всех животных
+    create_button(root_window, "Воспроизвести звуки ВСЕХ животных | Play ALL Animal Sounds", play_all_animal_sounds,
+                  width=element_width).pack(pady=7)
+
     # Создание кнопки для просмотра объектов зоопарка
     create_button(root_window, "Просмотр животных и персонала | View Animals and Staff", view_entities,
                   width=element_width).pack(pady=7)
