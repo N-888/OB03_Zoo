@@ -17,3 +17,52 @@
 2025-07-01 02:37:57,560 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
 2025-07-01 02:40:28,471 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
 2025-07-01 02:42:23,685 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:17:12,863 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:21:31,185 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:21:47,830 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:24:08,876 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:24:31,497 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:28:53,168 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:30:17,123 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:31:28,792 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:32:53,722 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:34:17,325 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:38:17,599 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:39:02,363 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:40:02,712 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:49:17,439 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 03:50:08,588 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:06:01,424 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:12:20,054 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:14:38,812 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:16:22,448 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:20:54,431 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:22:00,650 Ч INFO Ч Staff мрибтюбь.юддь боритюбьюб  риюбь  hired.
+2025-07-01 04:25:50,342 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:36:42,245 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:38:14,713 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:40:35,469 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:42:21,843 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:44:08,036 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:44:54,295 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:45:48,232 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 04:50:52,765 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 05:09:04,568 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 05:11:02,892 Ч INFO Ч Staff орбьт лиюло.лт.ль юолтюбь hired.
+2025-07-01 05:17:33,027 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 05:17:55,257 Ч INFO Ч Staff би    риюоь  юло.дль.дль hired.
+2025-07-01 05:18:43,119 Ч INFO Ч Staff ¬асилий Ѕоневронтович √адеев hired.
+2025-07-01 05:20:06,540 Ч INFO Ч Staff лнгпдло онриблотюол днориюлотюобь hired.
+2025-07-01 05:20:12,365 Ч INFO Ч Animal ьи бт б  added to the zoo.
+2025-07-01 05:20:39,108 Ч INFO Ч Staff юло ю hired.
+2025-07-01 05:20:59,760 Ч INFO Ч ьи бт б  growls.
+2025-07-01 05:21:11,568 Ч INFO Ч Zoo state saved to file.
+2025-07-01 05:21:16,143 Ч INFO Ч Zoo state saved to file.
+2025-07-01 05:21:25,423 Ч INFO Ч Zoo state loaded from file.
+2025-07-01 05:22:28,800 Ч WARNING Ч Icon not found: bitmap "zoo_logo.ico" not defined
+2025-07-01 05:23:16,731 Ч INFO Ч Animal hbjh,b84653 added to the zoo.
+2025-07-01 05:23:52,919 Ч INFO Ч Animal ,jhb.n ygbljbljbl.kjb added to the zoo.
+2025-07-01 05:24:06,507 Ч INFO Ч Staff jytfkylghkj.lkn.kjb hired.
+2025-07-01 05:24:24,065 Ч INFO Ч Staff m,nb m hired.
+2025-07-01 05:24:39,351 Ч INFO Ч Zoo state saved to file.
+2025-07-01 05:24:43,094 Ч INFO Ч Zoo state loaded from file.

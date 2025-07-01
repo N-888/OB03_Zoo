@@ -113,11 +113,11 @@ def run_gui(zoo):
     root_window = tk.Tk()
     root_window.title(f"{zoo.name} Management") # Заголовок окна
 
-    # Увеличиваем ширину окна в 3 раза
-    root_window.geometry("700x700")
+    # Размеры окна
+    root_window.geometry("500x629")
 
     # Устанавливаем фон окна (оливково-салатовая гамма)
-    root_window.configure(bg="#dce2b8")
+    root_window.configure(bg="#dce2b9")
 
     # Попытка установить иконку (логотип)
     try:
@@ -162,7 +162,7 @@ def run_gui(zoo):
         name = simple_input("Enter ZooKeeper Name / Введите имя смотрителя:")
         if name:
             zoo.add_staff(ZooKeeper(name))
-            messagebox.showinfo("Success / Успешно", f"ZooKeeper {name} added.")
+            messagebox.showinfo("Success / Успешно", f"ZooKeeper/ Смотритель {name} added/ добавлен.")
 
         # Функция добавления ветеринара
 
@@ -170,7 +170,7 @@ def run_gui(zoo):
         name = simple_input("Enter Veterinarian Name / Введите имя ветеринара:")
         if name:
             zoo.add_staff(Veterinarian(name))
-            messagebox.showinfo("Success / Успешно", f"Veterinarian {name} added.")
+            messagebox.showinfo("Success / Успешно", f"Veterinarian/ Ветеринар {name} added/ добавлен.")
 
         # Функция вывода звуков животных
 
@@ -203,9 +203,9 @@ def run_gui(zoo):
         input_window = tk.Toplevel(root_window)
         input_window.title(prompt)
         input_window.configure(bg=bg_color)
-        input_window.geometry("300x100")
+        input_window.geometry("500x98")
 
-        tk.Label(input_window, text=prompt, bg=bg_color, fg=text_color).pack()
+        tk.Label(input_window, border=7, width=48, text=prompt, bg=bg_color, fg=text_color).pack()
         entry = tk.Entry(input_window, bg=entry_bg)
         entry.pack()
 
@@ -215,7 +215,8 @@ def run_gui(zoo):
             result['value'] = entry.get()
             input_window.destroy()
 
-        tk.Button(input_window, text="OK", command=submit, bg=btn_color, fg=text_color).pack()
+        tk.Button(input_window, border=1, height=1, width=3, text="OK", command=submit, bg=btn_color,
+                  fg=text_color).pack(pady=8)
         input_window.wait_window()
         return result['value']
 
@@ -223,117 +224,48 @@ def run_gui(zoo):
 
         # Поле имени животного
 
-    tk.Label(root_window, text="Name / Имя:", bg=bg_color, fg=text_color).pack()
-    name_entry = tk.Entry(root_window, bg=entry_bg)
-    name_entry.pack(pady=8)
+    tk.Label(root_window, text="Name / введите Имя животного:",  border=18, width=48, bg=bg_color, fg=text_color).pack()
+    name_entry = tk.Entry(root_window, width=48, bg=entry_bg)
+    name_entry.pack(pady=5)
 
     # Поле возраста животного
-    tk.Label(root_window, text="Age (months) / Возраст (мес):", bg=bg_color, fg=text_color).pack()
-    age_entry = tk.Entry(root_window, bg=entry_bg)
-    age_entry.pack(pady=8)
+    tk.Label(root_window, text="Age (months) / введите Возраст животного (мес):", border=18, width=48, bg=bg_color, fg=text_color).pack()
+    age_entry = tk.Entry(root_window, width=48, bg=entry_bg)
+    age_entry.pack(pady=5)
 
     # Радиокнопки для выбора типа животного
     animal_type_var = tk.StringVar(value="Bird")
-    tk.Label(root_window, text="Type / Тип:", bg=bg_color, fg=text_color).pack(pady=5)
+    tk.Label(root_window, text="Type / выберите Тип животного:", border=18, width=48, bg=bg_color, fg=text_color).pack(pady=5)
     for animal_type, label in [("Bird", "Bird-Птица"), ("Mammal", "Mammal-Млекопитающее"),
                                ("Reptile", "Reptile-Рептилия")]:
-        tk.Radiobutton(root_window, text=label, variable=animal_type_var, value=animal_type,
+        tk.Radiobutton(root_window, width=48, text=label, variable=animal_type_var, value=animal_type,
                        bg=bg_color, fg=text_color, selectcolor=entry_bg).pack(pady=5)
 
     # Кнопка добавления животного
-    tk.Button(root_window, text="Add Animal / Добавить Животное", command=add_animal_gui, bg=btn_color,
+    tk.Button(root_window, width=48, text="Add Animal / Добавить Животное", command=add_animal_gui, bg=btn_color,
               fg=text_color).pack(pady=5)
 
     # Кнопка добавления смотрителя
-    tk.Button(root_window, text="Add ZooKeeper / Добавить смотрителя", command=add_keeper, bg=btn_color,
+    tk.Button(root_window, width=48, text="Add ZooKeeper / Добавить смотрителя", command=add_keeper, bg=btn_color,
               fg=text_color).pack(pady=5)
 
     # Кнопка добавления ветеринара
-    tk.Button(root_window, text="Add Veterinarian / Добавить ветеринара", command=add_vet, bg=btn_color,
+    tk.Button(root_window, width=48, text="Add Veterinarian / Добавить ветеринара", command=add_vet, bg=btn_color,
               fg=text_color).pack(pady=5)
 
     # Кнопка вывода звуков животных
-    tk.Button(root_window, text="Show Animal Sounds / Звуки животных", command=show_animal_sounds, bg=btn_color,
+    tk.Button(root_window, width=48, text="Show Animal Sounds / Звуки животных", command=show_animal_sounds, bg=btn_color,
               fg=text_color).pack(pady=5)
 
     # Кнопка сохранения зоопарка
-    tk.Button(root_window, text="Save Zoo / Сохранить зоопарк", command=save_zoo, bg=btn_color, fg=text_color).pack(
+    tk.Button(root_window, width=48, text="Save Zoo / Сохранить зоопарк", command=save_zoo, bg=btn_color, fg=text_color).pack(
         pady=5)
 
     # Кнопка загрузки зоопарка
-    tk.Button(root_window, text="Load Zoo / Загрузить зоопарк", command=load_zoo, bg=btn_color, fg=text_color).pack(
+    tk.Button(root_window, width=48, text="Load Zoo / Загрузить зоопарк", command=load_zoo, bg=btn_color, fg=text_color).pack(
         pady=5)
 
     # Кнопка выхода
-    tk.Button(root_window, text="Exit / Выход", command=root_window.destroy, bg=btn_color, fg=text_color).pack(pady=10)
+    tk.Button(root_window, width=48, text="Exit / Выход", command=root_window.destroy, bg=btn_color, fg=text_color).pack(pady=12)
 
     root_window.mainloop()  # Запуск главного цикла окна
-
-# Консольное меню взаимодействия с пользователем
-def menu(zoo):
-    while True:
-        # Меню
-        print("\nZoo Management System / Система Управления зоопарком")
-        print("1. Add Animal / добавить Животное")
-        print("2. Add ZooKeeper / добавить Смотрителя зоопарка")
-        print("3. Add Veterinarian / добавить Ветеринара")
-        print("4. Show Animal Sounds / показать Звуки животных")
-        print("5. Save Zoo / Сохранить зоопарк")
-        print("6. Load Zoo / Загрузить зоопарк")
-        print("7. Open GUI / открыть Графический Интерфейс")
-        print("0. Exit / Выход")
-
-        choice = input("Choose an option / Выберите вариант: ")
-
-        # Обработка выбора пользователя
-        if choice == "1":
-            name = input("Animal Name / Имя животного: ")
-            try:
-                age = float(input("Animal Age (monthes) / Возраст животного (месяцы): "))
-            except ValueError:
-                print("Age must be a number / Возраст должен быть числом.")
-                continue
-
-            type_choice = input("Type (Bird-Птица/Mammal-Млекопитающее/Reptile-Рептилия): ").strip()
-            if type_choice.lower() == "bird-Птица":
-                zoo.add_animal(Bird(name, age))
-            elif type_choice.lower() == "mammal-Млекопитающее":
-                zoo.add_animal(Mammal(name, age))
-            elif type_choice.lower() == "reptile-Рептилия":
-                zoo.add_animal(Reptile(name, age))
-            else:
-                print("Invalid animal type / Неверный тип животного!")
-
-        elif choice == "2":
-            name = input("ZooKeeper Name / Имя Смотрителя зоопарка: ")
-            zoo.add_staff(ZooKeeper(name))
-
-        elif choice == "3":
-            name = input("Veterinarian Name / Имя Ветеринара зоопарка: ")
-            zoo.add_staff(Veterinarian(name))
-
-        elif choice == "4":
-            animal_sound(zoo.animals)
-
-        elif choice == "5":
-            zoo.save_zoo()
-
-        elif choice == "6":
-            loaded_zoo = Zoo.load_zoo()
-            zoo.animals = loaded_zoo.animals
-            zoo.staff = loaded_zoo.staff
-            zoo.name = loaded_zoo.name
-
-        elif choice == "7":
-            run_gui(zoo)
-
-        elif choice == "0":
-            break
-
-        else:
-            print("Invalid choice / Неверный выбор!")
-
-# Точка входа — запуск программы
-if __name__ == "__main__":
-    zoo_instance = Zoo("New Zoo / Новый Зоопарк")  # Создаём зоопарк
-    menu(zoo_instance)  # Запускаем меню
